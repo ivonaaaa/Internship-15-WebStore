@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import AddProduct from "./pages/AddProduct";
 //import Products from "./pages/Products";
-//import AddProduct from "./pages/AddProduct";
+//! jos import za 404 page?
 import "./styles/App.css";
 
 function App() {
@@ -12,9 +13,11 @@ function App() {
         <Navigation />
 
         <Routes>
-          {/* <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/add-product" element={<AddProduct />} />
+          {/*
           <Route path="/" element={<Products />}></Route>
-          <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<NotFound />} />
+          */}
         </Routes>
       </Router>
     </>
