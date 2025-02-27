@@ -2,11 +2,22 @@ import { useState, useEffect } from "react";
 import { Product } from "../types/Product.tsx";
 import fetchProducts from "../services/api.ts";
 import ProductCard from "../components/ProductCard.tsx";
-import { Container, Grid2, Typography } from "@mui/material";
+import {
+  Container,
+  Grid2,
+  Typography,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  //! ode ce trebat jos dodat i niz za filtirranje i sta vec
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [search, setSearch] = useState("");
 
   const getProducts = async () => {
     const apiProducts = await fetchProducts();
@@ -22,6 +33,11 @@ const Products = () => {
       allProducts = [...localProducts, ...apiProducts.slice(0, remainingSpace)];
     }
     setProducts(allProducts);
+
+    const categories = Array.from(
+      new Set(apiProducts.map((p: Product) => p.category || "Uncategorized"))
+    );
+    setCategories(categories);
   };
 
   useEffect(() => {
@@ -31,13 +47,41 @@ const Products = () => {
     return () => window.removeEventListener("storage", getProducts);
   }, []);
 
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(search.toLowerCase()) &&
+      (selectedCategory === "" || product.category === selectedCategory)
+  );
+
   return (
     <Container>
       <Typography>Products</Typography>
 
+      <TextField
+        label="Search products..."
+        fullWidth
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <FormControl fullWidth>
+        <InputLabel>Filter by category</InputLabel>
+        <Select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <MenuItem value="">All</MenuItem>
+          {categories.map((category) => (
+            <MenuItem key={category} value={category}>
+              {category}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
       <Grid2 container spacing={3}>
-        {products.map((product) => (
-          <Grid2>
+        {filteredProducts.map((product) => (
+          <Grid2 key={product.id}>
             <ProductCard product={product} />
           </Grid2>
         ))}
