@@ -8,18 +8,27 @@ const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   //! ode ce trebat jos dodat i niz za filtirranje i sta vec
 
-  useEffect(() => {
-    const getProducts = async () => {
-      const apiProducts = await fetchProducts();
-      const storedProducts = localStorage.getItem("Products");
-      const localProducts: Product[] = storedProducts
-        ? JSON.parse(storedProducts)
-        : [];
-      const allProducts = [...apiProducts, ...localProducts];
-      setProducts(allProducts);
-    };
+  const getProducts = async () => {
+    const apiProducts = await fetchProducts();
+    const storedProducts = localStorage.getItem("Products");
+    const localProducts: Product[] = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
 
+    let allProducts;
+    if (localProducts.length >= 20) allProducts = localProducts.slice(0, 20);
+    else {
+      const remainingSpace = 20 - localProducts.length;
+      allProducts = [...localProducts, ...apiProducts.slice(0, remainingSpace)];
+    }
+    setProducts(allProducts);
+  };
+
+  useEffect(() => {
     getProducts();
+
+    window.addEventListener("storage", getProducts);
+    return () => window.removeEventListener("storage", getProducts);
   }, []);
 
   return (

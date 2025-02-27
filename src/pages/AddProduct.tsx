@@ -10,13 +10,13 @@ const AddProduct = () => {
       ...product,
     };
 
-    const storedProducts = localStorage.getItem("customProducts");
+    const storedProducts = localStorage.getItem("Products");
     const products: Product[] = storedProducts
       ? JSON.parse(storedProducts)
       : [];
 
     products.push(newProduct);
-    localStorage.setItem("customProducts", JSON.stringify(products));
+    localStorage.setItem("Products", JSON.stringify(products));
   };
 
   return (
