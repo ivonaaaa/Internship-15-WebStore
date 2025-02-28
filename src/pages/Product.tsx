@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../types/Product";
+import ProductCard from "../components/ProductCard";
 import fetchProducts from "../services/api";
 import {
   Container,
@@ -62,17 +63,7 @@ const ProductDetails = () => {
           <Grid2 container spacing={3}>
             {relatedProducts.map((related) => (
               <Grid2 key={related.id}>
-                <Card>
-                  <CardMedia
-                    component="img"
-                    image={related.image}
-                    alt={related.title}
-                  />
-                  <CardContent>
-                    <Typography>{related.title}</Typography>
-                    <Typography>${related.price}</Typography>
-                  </CardContent>
-                </Card>
+                <ProductCard product={related} />
               </Grid2>
             ))}
           </Grid2>

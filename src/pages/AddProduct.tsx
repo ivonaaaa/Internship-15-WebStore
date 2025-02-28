@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { Container } from "@mui/material";
-import { Product } from "../types/Product.tsx";
+import { Product } from "../types/Product";
 import ProductForm from "../components/ProductForm";
 
 const AddProduct = () => {

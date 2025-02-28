@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Product } from "../types/Product.tsx";
-import fetchProducts from "../services/api.ts";
-import ProductCard from "../components/ProductCard.tsx";
+import { Product } from "../types/Product";
+import fetchProducts from "../services/api";
+import ProductCard from "../components/ProductCard";
 import {
   Container,
   Grid2,
