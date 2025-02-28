@@ -46,13 +46,25 @@ const ProductForm = ({ onSubmit }: ProductFormProps) => {
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
-      <Typography>Add Product</Typography>
-      {error && <Typography>{error}</Typography>}
+      <Typography
+        variant="h5"
+        sx={{ fontFamily: "'Cascadia Code', monospace", color: "white", mb: 2 }}
+      >
+        Add Product
+      </Typography>
+      {error && (
+        <Typography
+          sx={{ fontFamily: "'Cascadia Code', monospace", color: "red", mb: 2 }}
+        >
+          {error}
+        </Typography>
+      )}
       <TextField
         label="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
+        sx={{ mb: 2 }}
       />
       <TextField
         label="Price"
@@ -60,6 +72,7 @@ const ProductForm = ({ onSubmit }: ProductFormProps) => {
         value={price}
         onChange={(e) => setPrice(e.target.value)}
         fullWidth
+        sx={{ mb: 2 }}
       />
       <TextField
         label="Description"
@@ -68,12 +81,14 @@ const ProductForm = ({ onSubmit }: ProductFormProps) => {
         fullWidth
         multiline
         rows={3}
+        sx={{ mb: 2 }}
       />
       <TextField
         label="Image URL"
         value={image}
         onChange={(e) => setImage(e.target.value)}
         fullWidth
+        sx={{ mb: 2 }}
       />
       <TextField
         select
@@ -89,7 +104,15 @@ const ProductForm = ({ onSubmit }: ProductFormProps) => {
           </MenuItem>
         ))}
       </TextField>
-      <Button type="submit" variant="contained" color="primary">
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          backgroundColor: "#e3caf1",
+          "&:hover": { backgroundColor: "#cad8f1" },
+          fontFamily: '"Cascadia Code", monospace',
+        }}
+      >
         Add Product
       </Button>
     </Box>

@@ -55,13 +55,23 @@ const Products = () => {
 
   return (
     <Container>
-      <Typography>Products</Typography>
+      <Typography
+        sx={{
+          fontSize: "1.8rem",
+          fontFamily: "Cascadia Code",
+          fontWeight: "bold",
+          mb: 2,
+        }}
+      >
+        Products
+      </Typography>
 
       <TextField
         label="Search products..."
         fullWidth
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        sx={{ mb: 2 }}
       />
 
       <FormControl fullWidth>
@@ -69,6 +79,7 @@ const Products = () => {
         <Select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
+          sx={{ mb: 8 }}
         >
           <MenuItem value="">All</MenuItem>
           {categories.map((category) => (
