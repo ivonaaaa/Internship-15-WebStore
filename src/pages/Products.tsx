@@ -76,6 +76,7 @@ const Products = () => {
               {category}
             </MenuItem>
           ))}
+          <MenuItem value="else">else</MenuItem>
         </Select>
       </FormControl>
 

@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container>
         <Toolbar>
           <Typography>Web Store</Typography>
+          <Typography>|</Typography>
           <Button color="inherit" component={Link} to="/add-product">
             Add New Product
           </Button>
